@@ -21,19 +21,25 @@ const onSearchCountryInput = event => {
       .then(data => {
           if (data.length > 10) {
             Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
+             return
           } else if (data.length >= 2 && data.length <= 10) {
               countryListEl.innerHTML = createCountryList(data)
               countryInfoBox.innerHTML = '';
+              return
           } else {
               data[0].languages = Object.values(data[0].languages).join(', ');
               countryListEl.innerHTML = '';
               countryInfoBox.innerHTML = createCountryCard(data)
               console.log(Object.values(data[0].languages));
+              return
         }
       
     })
       .catch(err => {
         Notiflix.Notify.failure('Oops, there is no country with that name');
+        countryListEl.innerHTML = '';
+        countryInfoBox.innerHTML = '';
+        return
     });
 };
 
