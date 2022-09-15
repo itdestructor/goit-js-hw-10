@@ -20,6 +20,8 @@ const onSearchCountryInput = event => {
   fetchCountries(searchedCountry)
       .then(data => {
           if (data.length > 10) {
+            countryListEl.innerHTML = '';
+            countryInfoBox.innerHTML = '';
             Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
              return
           } else if (data.length >= 2 && data.length <= 10) {
